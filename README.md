@@ -68,3 +68,28 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+color palette
+San Juan
+#284266
+
+Cloud
+#cdcbca
+
+Neptune
+#7aaabd
+
+Steel Blue
+#5790b9
+
+San Juan (Dark)
+#1a2c40
+
+Cloud (Text)
+#dcdcdc
+
+Neptune (Dark)
+#6090a0
+
+Steel Blue (Dark)
+#41759c
