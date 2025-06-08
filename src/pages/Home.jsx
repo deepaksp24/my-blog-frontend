@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import BlogCard from "../components/BlogCard";
-import { getBlogs } from "../api/blog";
+import { getHomeBlogs } from "../api/blog";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    getBlogs().then(setBlogs);
+    getHomeBlogs().then(setBlogs);
   }, []);
   return (
     <>
