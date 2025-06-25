@@ -16,9 +16,7 @@ export default function Home() {
       </Typography>
       <Grid container spacing={2}>
         {blogs.map((blog) => (
-          <Grid item xs={12} sm={6} md={4} key={blog.id}>
-            <BlogCard blog={blog} />
-          </Grid>
+          <BlogCard blog={blog} />
         ))}
       </Grid>
     </>

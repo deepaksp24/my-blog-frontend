@@ -9,7 +9,10 @@ export const getHomeBlogs = async () => {
   return result?.body?.data || [];
 };
 
-// export const getBlogById = async (id) =>
-//   dummyBlogs.find((blog) => blog.id === Number(id));
-// export const createBlog = async (blog) =>
-//   dummyBlogs.push({ id: dummyBlogs.length + 1, ...blog });
+export const getBlog = async (id) => {
+  const response = await fetch(`${BASE_URL}blog/?id=${id}`);
+  if (!response.ok) throw new Error("Failed to fetch blogs");
+
+  const result = await response.json();
+  return result?.body;
+};
