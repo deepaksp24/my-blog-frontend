@@ -16,3 +16,33 @@ export const getBlog = async (id) => {
   const result = await response.json();
   return result?.body;
 };
+
+export const registerUser = async (payload) => {
+  const response = await fetch(`${BASE_URL}auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) throw new Error("Failed to register");
+
+  const result = await response.json();
+  return result?.body;
+};
+
+export const loginUser = async (payload) => {
+  const response = await fetch(`${BASE_URL}auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) throw new Error("Failed to login");
+
+  const result = await response.json();
+  return result?.body;
+};
