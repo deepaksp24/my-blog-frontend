@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useTheme } from "@mui/material/styles";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Navbar({ toggleColorMode }) {
   const theme = useTheme();
@@ -25,6 +26,9 @@ export default function Navbar({ toggleColorMode }) {
           ) : (
             <Brightness4Icon />
           )}
+        </IconButton>
+        <IconButton onClick={() => {}}>
+          <PersonIcon style={{ fontSize: 30, color: "white" }} />
         </IconButton>
       </Toolbar>
     </AppBar>
