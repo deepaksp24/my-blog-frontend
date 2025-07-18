@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import "./App.css";
+import { UserProvider } from "./context/UserContext";
 import Navbar from "./pages/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
@@ -9,7 +10,7 @@ import Register from "./pages/Register";
 
 function App({ toggleColorMode }) {
   return (
-    <>
+    <UserProvider>
       <Navbar toggleColorMode={toggleColorMode} />
       <Container sx={{ mt: 4 }}>
         <Routes>
@@ -19,7 +20,7 @@ function App({ toggleColorMode }) {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Container>
-    </>
+    </UserProvider>
   );
 }
 

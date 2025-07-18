@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, navigate } from "react";
 import { Box, Grid, TextField, Button, Typography, Paper } from "@mui/material";
-import { loginUser } from "../api/blog";
+import { loginUser, verifyUser } from "../api/blog";
+import { useUser } from "../context/UserContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { setUser } = useUser();
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const userData = await loginUser({ email, password });
       localStorage.setItem("token", userData.access_token);
-      console.log("Login success:", userData);
-      // maybe redirect: window.location.href = "/"
+
+      // Verify token and fetch user info
+      const res = await verifyUser(userData.access_token);
+      if (res.body?.status) {
+        setUser({
+          username: res.body.user_name,
+          displayName: res.body.display_name,
+          userId: res.body.user_id,
+        });
+      }
+
+      navigate("/");
     } catch (err) {
       console.error("Login failed:", err);
     }

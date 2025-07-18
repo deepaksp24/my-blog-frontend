@@ -46,3 +46,29 @@ export const loginUser = async (payload) => {
   const result = await response.json();
   return result?.body;
 };
+
+export async function verifyUser(token) {
+  try {
+    const res = await fetch(`${BASE_URL}auth/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: token }),
+    });
+
+    const data = await res.json();
+
+    if (data.body?.status) {
+      return {
+        username: data.body.user_name,
+        email: data.body.display_name,
+      };
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Verification failed:", err);
+    return null;
+  }
+}

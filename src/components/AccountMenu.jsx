@@ -2,9 +2,12 @@ import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { NoAccountsRounded } from "@mui/icons-material";
+import { useUser } from "../context/UserContext";
+
 export default function AccountMenu() {
   const navigate = useNavigate();
-
+  const { username, email } = useUser();
+  const isLoggedIn = username && email;
   return (
     <Box
       sx={{
@@ -21,21 +24,34 @@ export default function AccountMenu() {
       }}
     >
       {/* <AccountCircleIcon sx={{ fontSize: 100 }} /> */}
-      <NoAccountsRounded sx={{ fontSize: 100 }} />
-
-      <Typography variant="h6" mt={2}>
-        John Doe
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        johndoe@example.com
-      </Typography>
-      <Button
-        variant="contained"
-        sx={{ mt: 2, px: 4 }}
-        onClick={() => navigate("/login")}
-      >
-        Login
-      </Button>
+      {isLoggedIn ? (
+        <>
+          <AccountCircleIcon sx={{ fontSize: 100 }} />
+          <Typography variant="h6" mt={2}>
+            {username}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {email}
+          </Typography>
+        </>
+      ) : (
+        <>
+          <NoAccountsRounded sx={{ fontSize: 100 }} />
+          <Typography variant="h6" mt={2}>
+            Guest
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Not logged in
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{ mt: 2, px: 4 }}
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </Button>
+        </>
+      )}
     </Box>
   );
 }
