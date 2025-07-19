@@ -1,21 +1,24 @@
-import React, { useState, navigate } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Grid, TextField, Button, Typography, Paper } from "@mui/material";
 import { loginUser, verifyUser } from "../api/blog";
 import { useUser } from "../context/UserContext";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setUser } = useUser();
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const userData = await loginUser({ email, password });
       localStorage.setItem("token", userData.access_token);
 
-      // Verify token and fetch user info
       const res = await verifyUser(userData.access_token);
       if (res.body?.status) {
         setUser({
@@ -23,11 +26,13 @@ function Login() {
           displayName: res.body.display_name,
           userId: res.body.user_id,
         });
-      }
 
-      navigate("/");
+        navigate("/");
+        setIsLoading(false);
+      }
     } catch (err) {
       console.error("Login failed:", err);
+      setIsLoading(false);
     }
   };
 
@@ -61,8 +66,9 @@ function Login() {
                 color="primary"
                 fullWidth
                 sx={{ mt: 2 }}
+                disabled={isLoading}
               >
-                Login
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </Paper>

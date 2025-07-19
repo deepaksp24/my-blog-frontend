@@ -5,7 +5,7 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ username: "", email: "" });
+  const [user, setUser] = useState(null); // null initially
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ ...user, setUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

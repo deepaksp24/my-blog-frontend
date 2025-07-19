@@ -6,8 +6,17 @@ import { useUser } from "../context/UserContext";
 
 export default function AccountMenu() {
   const navigate = useNavigate();
-  const { username, email } = useUser();
-  const isLoggedIn = username && email;
+  const { user, setUser } = useUser();
+  const isLoggedIn = user?.username && user?.email;
+
+  console.log("Menu ", user);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <Box
       sx={{
@@ -23,16 +32,22 @@ export default function AccountMenu() {
         padding: 2,
       }}
     >
-      {/* <AccountCircleIcon sx={{ fontSize: 100 }} /> */}
       {isLoggedIn ? (
         <>
           <AccountCircleIcon sx={{ fontSize: 100 }} />
           <Typography variant="h6" mt={2}>
-            {username}
+            {user.username}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {email}
+            {user.email}
           </Typography>
+          <Button
+            variant="contained"
+            sx={{ mt: 2, px: 4 }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </>
       ) : (
         <>
