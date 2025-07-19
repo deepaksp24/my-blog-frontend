@@ -20,11 +20,10 @@ function Login() {
       localStorage.setItem("token", userData.access_token);
 
       const res = await verifyUser(userData.access_token);
-      if (res.body?.status) {
+      if (res) { 
         setUser({
-          username: res.body.user_name,
-          displayName: res.body.display_name,
-          userId: res.body.user_id,
+          username: res.username,
+          email: res.email,
         });
 
         navigate("/");

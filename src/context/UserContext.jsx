@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
       if (data) setUser(data);
       else localStorage.removeItem("token");
     });
-  }, []);
+  }, [setUser]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

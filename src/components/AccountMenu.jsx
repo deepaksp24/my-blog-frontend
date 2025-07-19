@@ -9,7 +9,6 @@ export default function AccountMenu() {
   const { user, setUser } = useUser();
   const isLoggedIn = user?.username && user?.email;
 
-  console.log("Menu ", user);
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
