@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import BlogPage from "./pages/BlogPage";
 import Register from "./pages/Register";
+import BlogEditorPage from "./pages/BlogEditorPage";
 
 function App({ toggleColorMode }) {
   return (
@@ -18,6 +19,7 @@ function App({ toggleColorMode }) {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/blogeditor" element={<BlogEditorPage />} />
         </Routes>
       </Container>
     </UserProvider>
