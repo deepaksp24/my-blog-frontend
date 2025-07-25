@@ -17,6 +17,21 @@ export const getBlog = async (id) => {
   return result?.body;
 };
 
+  export const postBlog = async (payload) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${BASE_URL}blog/post`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    
+    return response.json();
+  };
+
 export const registerUser = async (payload) => {
   const response = await fetch(`${BASE_URL}auth/register`, {
     method: "POST",

@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import BlogCard from "../components/BlogCard";
 import { getHomeBlogs } from "../api/blog";
 
+import EditSquareIcon from "@mui/icons-material/EditSquare";
 export default function Home() {
+  const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
+  const handleCreatePost = () => {
+    navigate("/blogeditor");
+  };
 
   useEffect(() => {
     const loadBlogs = async () => {
@@ -22,9 +28,20 @@ export default function Home() {
 
   return (
     <>
-      <Typography variant="h4" gutterBottom>
-        Recent Posts
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between", // Pushes children to opposite ends
+          alignItems: "center", // Vertically centers items (optional)
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          Recent Posts
+        </Typography>
+        <IconButton onClick={handleCreatePost}>
+          <EditSquareIcon style={{ fontSize: 25 }} />
+        </IconButton>
+      </Box>
       <Grid container spacing={2}>
         {blogs === null ? (
           <Typography color="error">

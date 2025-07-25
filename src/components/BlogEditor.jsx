@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, TextField, Stack, Typography } from "@mui/material";
 
 export default function BlogEditor({ onSave }) {
+  const [title, setTitle] = useState("");
   const [isActive, setIsActive] = useState({
     bold: false,
     italic: false,
@@ -41,7 +42,12 @@ export default function BlogEditor({ onSave }) {
 
   const handleSave = () => {
     const html = editor.getHTML();
-    if (onSave) onSave(html);
+    const payload = {
+      title,
+      tags: [],
+      content: html,
+    };
+    if (onSave) onSave(payload);
     console.log(html);
   };
 
@@ -82,9 +88,19 @@ export default function BlogEditor({ onSave }) {
       </Stack>
 
       {/* Editor content */}
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Title"
+          variant="outlined"
+          fullWidth
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </Box>
+
       <Box
         sx={{
-          border: "1px solid ",
+          border: "1px solid",
           borderRadius: 2,
           padding: 2,
           minHeight: 200,
@@ -95,7 +111,7 @@ export default function BlogEditor({ onSave }) {
       </Box>
 
       <Button variant="contained" onClick={handleSave}>
-        Save
+        Publish
       </Button>
     </Box>
   );
