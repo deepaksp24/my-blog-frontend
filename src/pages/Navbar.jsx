@@ -22,7 +22,7 @@ export default function Navbar({ toggleColorMode }) {
       <Toolbar>
         <Typography
           variant="h6"
-          sx={{ flexGrow: 1 }}
+          sx={{ flexGrow: 1, textDecoration: "none" }}
           component={Link}
           to="/"
           color="inherit"

@@ -17,7 +17,7 @@ export default function BlogPage() {
   return (
     <>
       <h1>{blog?.title}</h1>
-      <p>{blog?.content}</p>
+      <div dangerouslySetInnerHTML={{ __html: blog?.content }} />
 
       <AppSnackbar
         open={openSnackbar}
