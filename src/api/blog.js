@@ -6,7 +6,7 @@ export const getHomeBlogs = async () => {
 
   const result = await response.json();
 
-  return result?.body?.data || [];
+  return result || [];
 };
 
 export const getBlog = async (id) => {
@@ -14,23 +14,23 @@ export const getBlog = async (id) => {
   if (!response.ok) throw new Error("Failed to fetch blogs");
 
   const result = await response.json();
-  return result?.body;
+  return result;
 };
 
-  export const postBlog = async (payload) => {
-    const token = localStorage.getItem("token");
+export const postBlog = async (payload) => {
+  const token = localStorage.getItem("token");
 
-    const response = await fetch(`${BASE_URL}blog/post`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    });
-    
-    return response.json();
-  };
+  const response = await fetch(`${BASE_URL}blog/post`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  return response.json();
+};
 
 export const registerUser = async (payload) => {
   const response = await fetch(`${BASE_URL}auth/register`, {

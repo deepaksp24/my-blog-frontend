@@ -15,8 +15,10 @@ export default function Home() {
   useEffect(() => {
     const loadBlogs = async () => {
       try {
-        const data = await getHomeBlogs();
-        setBlogs(data);
+        const resonse = await getHomeBlogs();
+        if (resonse.success) {
+          setBlogs(resonse.data);
+        }
       } catch (err) {
         console.error("Failed to fetch blogs:", err);
         setBlogs(null);

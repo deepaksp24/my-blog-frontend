@@ -7,7 +7,7 @@ export default function BlogEditorPage() {
   const handleSave = async (payload) => {
     const result = await postBlog(payload);
     console.log(result);
-    if (result.status) {
+    if (result.success) {
       navigate("/");
     }
   };

@@ -29,14 +29,14 @@ export default function BlogCard({ blog }) {
       }}
       onClick={async () => {
         try {
-          const response = await getBlog(blog.id); 
+          const response = await getBlog(blog.id);
 
-          if (response.status) {
+          if (response.success) {
             navigate("/blog", {
               state: {
-                blog: response.blog,
+                blog: response.data,
                 showSnackbar: true,
-                snackbarMessage: "Blog loaded successfully!",
+                snackbarMessage: response.message,
               },
             });
           }
