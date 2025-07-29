@@ -30,6 +30,7 @@ export default function Home() {
     <>
       <Box
         sx={{
+          mt: 8,
           display: "flex",
           justifyContent: "space-between", // Pushes children to opposite ends
           alignItems: "center", // Vertically centers items (optional)

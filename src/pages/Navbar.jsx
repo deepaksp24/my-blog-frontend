@@ -18,7 +18,7 @@ export default function Navbar({ toggleColorMode }) {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Typography
           variant="h6"
