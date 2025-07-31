@@ -11,12 +11,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CardMedia from "@mui/material/CardMedia";
 import ShareIcon from "@mui/icons-material/Share";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "../context/SnackbarContext";
 
 import TagBar from "./TagBar";
 import { getBlog } from "../api/blog";
 
 export default function BlogCard({ blog }) {
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
 
   return (
     <Card
@@ -32,11 +34,12 @@ export default function BlogCard({ blog }) {
           const response = await getBlog(blog.id);
 
           if (response.success) {
+            showSnackbar("Blog loaded", "success");
             navigate("/blog", {
               state: {
                 blog: response.data,
-                showSnackbar: true,
-                snackbarMessage: response.message,
+                // showSnackbar: true,
+                // snackbarMessage: response.message,
               },
             });
           }
